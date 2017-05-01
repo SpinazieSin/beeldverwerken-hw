@@ -16,13 +16,13 @@ function main()
     % built in canny edge detector
 	e2 = edge(image,'Canny');
     
-    acc1 = hough(image, [-0.9,0.9],100, 100, 0);
+    acc1 = hough(image, [-0.9,0.9],50, 50, 0);
     acc2 = hough(image, [-0.9,0.9],100, 100, 1);
     
     figure;
 	subplot(2,2,1);
 	imshow(e1);
-    title('Canny edge detector from Lab 2');
+    title('Canny edge detector Lab 2');
 	subplot(2,2,2);
 	imshow(e2);
     title('Built-in Canny edge detector');
@@ -35,6 +35,6 @@ function main()
 
 %% Question 3
 
-
+    coords = houghlines(image, acc1, 50)
 
 end

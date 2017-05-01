@@ -1,3 +1,4 @@
+% Calculate Hough transform
 function accumulator = hough(im, Thresh, nrho, ntheta, method)
 
 if method == 0 % own implementation
@@ -9,8 +10,8 @@ end
 
 accumulator = zeros(nrho, ntheta);
 [y, x] = find(points);
-rows = size(im, 1)
-cols = size(im, 2)
+rows = size(im, 1);
+cols = size(im, 2);
 
 rhomax = sqrt(rows^2 + cols^2);
 drho = 2 * rhomax / (nrho-1);

@@ -1,0 +1,8 @@
+function [lines] = houghlines(im, h, thresh)
+
+for n = 1:nregions
+    mask = bw1 == n;
+    region = mask .* h;
+end
+
+end
