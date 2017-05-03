@@ -3,13 +3,13 @@
 
 function main()
     close all
-    
-    image = rgb2gray(im2double(imread('shapes.png')));
-%     image = rgb2gray(im2double(imread('billboard.png')));
-%     image = rgb2gray(im2double(imread('box.png')));
+    path = '../attachments/'
+    image = rgb2gray(im2double(imread(strcat(path, 'shapes.png'))));
+    %image = rgb2gray(im2double(imread(strcat(path, 'billboard.png'))));
+    %image = rgb2gray(im2double(imread(strcat(path, 'box.png'))));
 
     %% Question 2
-    
+
     % canny edge detector from lab 2
 	e1 = canny(image, 0.7);
     
@@ -18,7 +18,7 @@ function main()
     
     acc1 = hough(image, [-0.9,0.9],50, 50, 0);
     acc2 = hough(image, [-0.9,0.9],100, 100, 1);
-    
+
     figure;
 	subplot(2,2,1);
 	imshow(e1);
@@ -33,8 +33,7 @@ function main()
     imshow(acc2, []);
     title('Hough, using built-in Canny');
 
-%% Question 3
+    %% Question 3
 
-    coords = houghlines(image, acc1, 50)
-
+    coords = houghlines(image, acc1, 0.8)
 end
