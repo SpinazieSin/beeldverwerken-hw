@@ -9,16 +9,16 @@ drho = 2 * rhomax / (size(h, 1) - 1);
 dtheta = pi / size(h, 2);
 
 peaks = h > thresh;
-size(peaks)
- 
+
 [bwl, nregions] = bwlabel(peaks);
 
-size(bwl)
-nregions
 
+lines = zeros(nregions, 1);
 for n = 1:nregions
     mask = bwl == n;
     region = mask .* h;
+    [rho, theta] = max(max(region));
+    lines = [theta, rho];
 end
 
 end

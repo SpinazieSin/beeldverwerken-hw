@@ -35,5 +35,10 @@ function main()
 
     %% Question 3
 
-    coords = houghlines(image, acc1, 0.8)
+    coords = houghlines(image, acc1, 50)
+    [x1, y1, x2, y2] = thetarho2endpoints(coords(1), coords(2), 50,50)
+    imshow(image)
+    hold on
+    plot([x1, y1], [x2, y2])
+    hold off
 end
