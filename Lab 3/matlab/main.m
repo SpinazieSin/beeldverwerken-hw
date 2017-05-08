@@ -16,7 +16,7 @@ function main()
     % built in canny edge detector
 	e2 = edge(image,'Canny');
     
-    acc1 = hough(image, [-0.9,0.9],50, 50, 0);
+    acc1 = hough(image, [-0.9,0.9],500, 500, 0);
     acc2 = hough(image, [-0.9,0.9],100, 100, 1);
 
     figure;
@@ -35,10 +35,12 @@ function main()
 
     %% Question 3
 
-    coords = houghlines(image, acc1, 50)
-    [x1, y1, x2, y2] = thetarho2endpoints(coords(1), coords(2), 50,50)
+    coords = houghlines(image, acc1, 0.50);
     imshow(image)
     hold on
-    plot([x1, y1], [x2, y2])
+    for i = 1:length(coords)
+        [x1, y1, x2, y2] = thetarho2endpoints(coords(i,1), coords(i,2), 500, 500);
+        plot([x1, x2], [y1, y2]);
+    end
     hold off
 end
