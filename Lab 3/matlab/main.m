@@ -58,4 +58,14 @@ function main()
         plot(line)
     end
     hold off
+    %% Question 6
+    
+    image = rgb2gray(im2double(imread(strcat(path, 'box.png'))));
+    acc2 = hough(image, [-0.9,0.9],300, 300, 1);
+    
+    % show original image
+    imshow(image);
+    hold on
+    coords = houghlines(image, acc2, 0.4);
+    hold off
 end
