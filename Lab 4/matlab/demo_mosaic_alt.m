@@ -11,10 +11,9 @@ function demo_mosaic_alt(n_points)
     [xy, xaya] = pickmatchingpoints(f1, f2, n_points, 1);
 
     % create projection matrix and transpose
-    T = createProjectionMatrix(xy', xaya');
-    
+    M = createProjectionMatrix(xy', xaya')';
     % obtain real coordinates
-    T = maketform('projective', T)
+    T = maketform('projective', M/M(3,3));
     
     [x y] = tformfwd(T,[1 size(f1,2)], [1 size(f1,1)]);
 
