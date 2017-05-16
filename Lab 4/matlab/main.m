@@ -6,7 +6,8 @@ addpath('../attachments');
 
 %% QUESTION 2
 
-demo_mosaic_alt(4);
+% modified demo_mosaic.m (more than 4 points)
+demo_mosaic_alt(6);
 clear;
 
 %% QUESTION 3 Find matches
@@ -48,7 +49,7 @@ title('nachtwacht2.jpg');
 
 %% QUESTION 3 Estimate projection matrix
 
-% hand picked matches
+% hand picked points that match
 p1coords = m1coords(:,[3, 8, 11, 19, 24, 29])';
 p2coords = m2coords(:,[3, 8, 11, 19, 24, 29])';
 
@@ -87,7 +88,7 @@ m2 = matches(2,:);
 m2coords = frame2(:,m2);
 m2coords = m2coords(1:2,:);
 
-% hand picked matches
+% hand picked points that don't match
 p1coords = m1coords(:,[1, 7, 12, 18, 25, 30])';
 p2coords = m2coords(:,[1, 7, 12, 18, 25, 30])';
 
@@ -118,16 +119,17 @@ title('nachtwacht2.jpg');
 
 %% QUESTION 4 RANSAC
 
+% parameters
 n_points = 8;
 error = 1;
-iter = 5;
+iter = 10;
 thresh = 0.5;
 
-
+% find best fit using RANSAC and transform
 fit = ransac(f1, f2, n_points, error, iter, thresh)'
 T = maketform('projective', fit);
 
-% from demo_mosaic.m
+% visualize (from demo_mosaic.m)
 [x y] = tformfwd(T,[1 size(f1,2)], [1 size(f1,1)]);
 
 xdata = [min(1,x(1)) max(size(f2,2),x(2))];

@@ -1,6 +1,5 @@
-% script to demonstrate image mosaic
-% by handpicking 4 matching points
-% in the order topleft - topright - bottomright - bottomleft
+% This function is a modified version of demo_mosai.m
+% It takes a specified number of points as input.
 function demo_mosaic_alt(n_points)
     
     % read in images
