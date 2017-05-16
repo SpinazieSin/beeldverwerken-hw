@@ -6,7 +6,7 @@ addpath('../attachments');
 
 %% QUESTION 2
 
-demo_mosaic_alt(6);
+demo_mosaic_alt(4);
 clear;
 
 <<<<<<< HEAD
@@ -116,6 +116,29 @@ for i = 1:length(m2coords)
     text(m2coords(1, i), m2coords(2,i), sprintf('%02d',i), 'Color', 'green');
 end
 title('nachtwacht2.jpg');
+
+%% QUESTION 4 RANSAC
+
+n_points = 8;
+error = 1;
+iter = 5;
+thresh = 0.5;
+
+
+fit = ransac(f1, f2, n_points, error, iter, thresh)'
+T = maketform('projective', fit);
+
+% from demo_mosaic.m
+[x y] = tformfwd(T,[1 size(f1,2)], [1 size(f1,1)]);
+
+xdata = [min(1,x(1)) max(size(f2,2),x(2))];
+ydata = [min(1,y(1)) max(size(f2,1),y(2))];
+f12 = imtransform(f1,T,'Xdata',xdata,'YData',ydata);
+f22 = imtransform(f2, maketform('affine', [1 0 0; 0 1 0; 0 0 1]), 'Xdata',xdata,'YData',ydata);
+figure('name','RANSAC Mosaic');    
+subplot(1,1,1);
+imshow(max(f12,f22));
+
 =======
 %%
 demo_mosaic_alt(5);
